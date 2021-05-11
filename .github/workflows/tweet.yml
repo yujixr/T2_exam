@@ -12,8 +12,8 @@ jobs:
       matrix:
         config:
           - {
-              exams_file: exams.csv,
-              events_file: events.csv,
+              exams_file: tokyotech_exams.csv,
+              events_file: tokyotech_events.csv,
               consumer_key: CONSUMER_KEY,
               consumer_secret: CONSUMER_SECRET,
               access_token: ACCESS_TOKEN,
