@@ -8,18 +8,29 @@ jobs:
   tweet:
     runs-on: ubuntu-latest
     name: tweet
+    strategy:
+      matrix:
+        config:
+          - {
+              exams_file: exams.csv,
+              events_file: events.csv,
+              consumer_key: CONSUMER_KEY,
+              consumer_secret: CONSUMER_SECRET,
+              access_token: ACCESS_TOKEN,
+              access_token_secret: ACCESS_TOKEN_SECRET,
+            }
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
         with:
-          python-version: '3.x' # Version range or exact version of a Python version to use, using SemVer's version range syntax
-          architecture: 'x64' # optional x64 or x86. Defaults to x64 if not specified
+          python-version: "3.x" # Version range or exact version of a Python version to use, using SemVer's version range syntax
+          architecture: "x64" # optional x64 or x86. Defaults to x64 if not specified
       - run: pip install requests_oauthlib
       - run: python main.py
         env:
-          EXAMS_FILE: exams.csv
-          EVENTS_FILE: events.csv
-          CONSUMER_KEY: ${{ secrets.CONSUMER_KEY }}
-          CONSUMER_SECRET: ${{ secrets.CONSUMER_SECRET }}
-          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-          ACCESS_TOKEN_SECRET: ${{ secrets.ACCESS_TOKEN_SECRET }}
+          EXAMS_FILE: matrix.exams_file
+          EVENTS_FILE: matrix.events_file
+          CONSUMER_KEY: ${{ secrets[matrix.consumer_key] }}
+          CONSUMER_SECRET: ${{ secrets[matrix.consumer_secret] }}
+          ACCESS_TOKEN: ${{ secrets[matrix.access_token] }}
+          ACCESS_TOKEN_SECRET: ${{ secrets[matrix.access_token_secret] }}
