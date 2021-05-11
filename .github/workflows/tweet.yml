@@ -28,9 +28,9 @@ jobs:
       - run: pip install requests_oauthlib
       - run: python main.py
         env:
-          EXAMS_FILE: ${{ matrix.exams_file }}
-          EVENTS_FILE: ${{ matrix.events_file }}
-          CONSUMER_KEY: ${{ secrets[matrix.consumer_key] }}
-          CONSUMER_SECRET: ${{ secrets[matrix.consumer_secret] }}
-          ACCESS_TOKEN: ${{ secrets[matrix.access_token] }}
-          ACCESS_TOKEN_SECRET: ${{ secrets[matrix.access_token_secret] }}
+          EXAMS_FILE: ${{ matrix.config.exams_file }}
+          EVENTS_FILE: ${{ matrix.config.events_file }}
+          CONSUMER_KEY: ${{ secrets[matrix.config.consumer_key] }}
+          CONSUMER_SECRET: ${{ secrets[matrix.config.consumer_secret] }}
+          ACCESS_TOKEN: ${{ secrets[matrix.config.access_token] }}
+          ACCESS_TOKEN_SECRET: ${{ secrets[matrix.config.access_token_secret] }}
