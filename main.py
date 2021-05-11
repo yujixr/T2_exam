@@ -39,5 +39,5 @@ ACCESS_TOKEN_SECRET = os.getenv("ACCESS_TOKEN_SECRET")
 twitter = OAuth1Session(CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
 
 params = { "status": status }
-req = twitter.post("https://api.twitter.com/1.1/statuses/update.json", params = params)
-print(req)
+res = twitter.post("https://api.twitter.com/1.1/statuses/update.json", params = params)
+print(res.status_code, res.text)
