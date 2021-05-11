@@ -28,8 +28,8 @@ jobs:
       - run: pip install requests_oauthlib
       - run: python main.py
         env:
-          EXAMS_FILE: matrix.exams_file
-          EVENTS_FILE: matrix.events_file
+          EXAMS_FILE: ${{ matrix.exams_file }}
+          EVENTS_FILE: ${{ matrix.events_file }}
           CONSUMER_KEY: ${{ secrets[matrix.consumer_key] }}
           CONSUMER_SECRET: ${{ secrets[matrix.consumer_secret] }}
           ACCESS_TOKEN: ${{ secrets[matrix.access_token] }}
