@@ -19,6 +19,14 @@ jobs:
               access_token: ACCESS_TOKEN,
               access_token_secret: ACCESS_TOKEN_SECRET,
             }
+          - {
+              exams_file: keio_exams.csv,
+              events_file: keio_events.csv,
+              consumer_key: KEIO_CONSUMER_KEY,
+              consumer_secret: KEIO_CONSUMER_SECRET,
+              access_token: KEIO_ACCESS_TOKEN,
+              access_token_secret: KEIO_ACCESS_TOKEN_SECRET,
+            }
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
