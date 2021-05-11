@@ -17,6 +17,8 @@ jobs:
       - run: pip install requests_oauthlib
       - run: python main.py
         env:
+          EXAMS_FILE: exams.csv
+          EVENTS_FILE: events.csv
           CONSUMER_KEY: ${{ secrets.CONSUMER_KEY }}
           CONSUMER_SECRET: ${{ secrets.CONSUMER_SECRET }}
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}

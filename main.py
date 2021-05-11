@@ -20,9 +20,12 @@ def get_next_event(filename, today):
                 break
     return next_event
 
+EXAMS_FILE = os.getenv("EXAMS_FILE")
+EVENTS_FILE = os.getenv("EVENTS_FILE")
+
 today = date.today()
-next_exam = get_next_event("exams.csv", today)
-next_event = get_next_event("events.csv", today)
+next_exam = get_next_event(EXAMS_FILE, today)
+next_event = get_next_event(EVENTS_FILE, today)
 
 status = ""
 if next_exam is not None:
