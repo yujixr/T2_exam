@@ -12,16 +12,16 @@ jobs:
       matrix:
         config:
           - {
-              exams_file: tokyotech_exams.csv,
-              events_file: tokyotech_events.csv,
+              exams_file: tokyo_tech/exams.csv,
+              events_file: tokyo_tech/events.csv,
               consumer_key: CONSUMER_KEY,
               consumer_secret: CONSUMER_SECRET,
               access_token: ACCESS_TOKEN,
               access_token_secret: ACCESS_TOKEN_SECRET,
             }
           - {
-              exams_file: keio_exams.csv,
-              events_file: keio_events.csv,
+              exams_file: keio_univ/exams.csv,
+              events_file: keio_univ/events.csv,
               consumer_key: KEIO_CONSUMER_KEY,
               consumer_secret: KEIO_CONSUMER_SECRET,
               access_token: KEIO_ACCESS_TOKEN,
