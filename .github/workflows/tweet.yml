@@ -12,16 +12,14 @@ jobs:
       matrix:
         config:
           - {
-              exams_file: tokyo_tech/exams.csv,
-              events_file: tokyo_tech/events.csv,
+              file_dir: tokyo_tech,
               consumer_key: CONSUMER_KEY,
               consumer_secret: CONSUMER_SECRET,
               access_token: ACCESS_TOKEN,
               access_token_secret: ACCESS_TOKEN_SECRET,
             }
           - {
-              exams_file: keio_univ/exams.csv,
-              events_file: keio_univ/events.csv,
+              file_dir: keio_univ,
               consumer_key: KEIO_CONSUMER_KEY,
               consumer_secret: KEIO_CONSUMER_SECRET,
               access_token: KEIO_ACCESS_TOKEN,
@@ -36,8 +34,7 @@ jobs:
       - run: pip install requests_oauthlib
       - run: python main.py
         env:
-          EXAMS_FILE: ${{ matrix.config.exams_file }}
-          EVENTS_FILE: ${{ matrix.config.events_file }}
+          FILE_DIR: ${{ matrix.config.file_dir }}
           CONSUMER_KEY: ${{ secrets[matrix.config.consumer_key] }}
           CONSUMER_SECRET: ${{ secrets[matrix.config.consumer_secret] }}
           ACCESS_TOKEN: ${{ secrets[matrix.config.access_token] }}
