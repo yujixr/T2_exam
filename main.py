@@ -45,3 +45,6 @@ twitter = OAuth1Session(CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN, ACCESS_TOKE
 params = { "status": status }
 res = twitter.post("https://api.twitter.com/1.1/statuses/update.json", params = params)
 print(res.status_code, res.text)
+
+if res.status_code is not 200:
+    exit(1)
