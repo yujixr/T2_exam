@@ -13,17 +13,13 @@ jobs:
         config:
           - {
               file_dir: tokyo_tech,
-              consumer_key: CONSUMER_KEY,
-              consumer_secret: CONSUMER_SECRET,
-              access_token: ACCESS_TOKEN,
-              access_token_secret: ACCESS_TOKEN_SECRET,
+              access_token: T2_ACCESS_TOKEN,
+              access_token_secret: T2_ACCESS_TOKEN_SECRET,
             }
           - {
               file_dir: keio_univ,
-              consumer_key: KEIO_CONSUMER_KEY,
-              consumer_secret: KEIO_CONSUMER_SECRET,
-              access_token: KEIO_ACCESS_TOKEN,
-              access_token_secret: KEIO_ACCESS_TOKEN_SECRET,
+              access_token: KO_ACCESS_TOKEN,
+              access_token_secret: KO_ACCESS_TOKEN_SECRET,
             }
     steps:
       - uses: actions/checkout@v2
@@ -35,7 +31,7 @@ jobs:
       - run: python main.py
         env:
           FILE_DIR: ${{ matrix.config.file_dir }}
-          CONSUMER_KEY: ${{ secrets[matrix.config.consumer_key] }}
-          CONSUMER_SECRET: ${{ secrets[matrix.config.consumer_secret] }}
+          CONSUMER_KEY: ${{ secrets.CONSUMER_KEY }}
+          CONSUMER_SECRET: ${{ secrets.CONSUMER_SECRET }}
           ACCESS_TOKEN: ${{ secrets[matrix.config.access_token] }}
           ACCESS_TOKEN_SECRET: ${{ secrets[matrix.config.access_token_secret] }}
