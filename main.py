@@ -1,5 +1,6 @@
 import csv
 import os
+import time
 from datetime import date
 
 from requests_oauthlib import OAuth1Session
@@ -20,19 +21,24 @@ def get_next_event(filename, today):
                 break
     return next_event
 
-FILE_DIR = os.getenv("FILE_DIR")
-exams_file = os.path.join("./", FILE_DIR, "exams.csv")
-events_file = os.path.join("./", FILE_DIR, "events.csv")
-
-today = date.today()
-next_exam = get_next_event(exams_file, today)
-next_event = get_next_event(events_file, today)
-
+GITHUB_EVENT_NAME = os.getenv("GITHUB_EVENT_NAME")
 status = ""
-if next_exam is not None:
-    status += next_exam[0] + "まであと" + next_exam[1] + "日です。\n"
-if next_event is not None:
-    status += next_event[0] + "まであと" + next_event[1] + "日です。\n"
+
+if GITHUB_EVENT_NAME is "workflow_dispatch":
+    status = "This is for debugging. (" + str(time.time()) + ")"
+else:
+    FILE_DIR = os.getenv("FILE_DIR")
+    exams_file = os.path.join("./", FILE_DIR, "exams.csv")
+    events_file = os.path.join("./", FILE_DIR, "events.csv")
+
+    today = date.today()
+    next_exam = get_next_event(exams_file, today)
+    next_event = get_next_event(events_file, today)
+
+    if next_exam is not None:
+        status += next_exam[0] + "まであと" + next_exam[1] + "日です。\n"
+    if next_event is not None:
+        status += next_event[0] + "まであと" + next_event[1] + "日です。\n"
 print(status)
 
 CONSUMER_KEY = os.getenv("CONSUMER_KEY")
