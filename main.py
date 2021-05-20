@@ -24,7 +24,7 @@ def get_next_event(filename, today):
 GITHUB_EVENT_NAME = os.getenv("GITHUB_EVENT_NAME")
 status = ""
 
-if GITHUB_EVENT_NAME == "workflow_dispatch_x":
+if GITHUB_EVENT_NAME == "workflow_dispatch":
     status = "This is for debugging. (" + str(time.time()) + ")"
 else:
     FILE_DIR = os.getenv("FILE_DIR")
