@@ -21,11 +21,11 @@ jobs:
               access_token: KO_ACCESS_TOKEN,
               access_token_secret: KO_ACCESS_TOKEN_SECRET,
             }
-          # - {
-          #     file_dir: azabu_high,
-          #     access_token: AZB_ACCESS_TOKEN,
-          #     access_token_secret: AZB_ACCESS_TOKEN_SECRET,
-          #   }
+          - {
+              file_dir: azabu_high,
+              access_token: AZB_ACCESS_TOKEN,
+              access_token_secret: AZB_ACCESS_TOKEN_SECRET,
+            }
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
