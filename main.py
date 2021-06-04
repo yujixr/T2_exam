@@ -21,24 +21,27 @@ def get_next_event(filename, today):
                 break
     return next_event
 
+
 GITHUB_EVENT_NAME = os.getenv("GITHUB_EVENT_NAME")
 status = ""
 
 if GITHUB_EVENT_NAME == "workflow_dispatch":
-    status = "This is for debugging. (" + str(time.time()) + ")"
-else:
-    FILE_DIR = os.getenv("FILE_DIR")
-    exams_file = os.path.join("./", FILE_DIR, "exams.csv")
-    events_file = os.path.join("./", FILE_DIR, "events.csv")
+    status = "This is for debugging. (" + str(time.time()) + ")\n\n"
 
-    today = date.today()
-    next_exam = get_next_event(exams_file, today)
-    next_event = get_next_event(events_file, today)
+FILE_DIR = os.getenv("FILE_DIR")
+exams_file = os.path.join("./", FILE_DIR, "exams.csv")
+events_file = os.path.join("./", FILE_DIR, "events.csv")
 
-    if next_exam is not None:
-        status += next_exam[0] + "まであと" + next_exam[1] + "日です。\n"
-    if next_event is not None:
-        status += next_event[0] + "まであと" + next_event[1] + "日です。\n"
+today = date.today()
+events = [
+    get_next_event(exams_file, today),
+    get_next_event(events_file, today)
+]
+
+for event in events:
+    if event != None and len(event[0]) != 0:
+        status += event[0] + "まであと" + event[1] + "日です。\n"
+
 print(status)
 
 CONSUMER_KEY = os.getenv("CONSUMER_KEY")
@@ -46,10 +49,12 @@ CONSUMER_SECRET = os.getenv("CONSUMER_SECRET")
 ACCESS_TOKEN = os.getenv("ACCESS_TOKEN")
 ACCESS_TOKEN_SECRET = os.getenv("ACCESS_TOKEN_SECRET")
 
-twitter = OAuth1Session(CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
+twitter = OAuth1Session(CONSUMER_KEY, CONSUMER_SECRET,
+                        ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
 
-params = { "status": status }
-res = twitter.post("https://api.twitter.com/1.1/statuses/update.json", params = params)
+params = {"status": status}
+res = twitter.post(
+    "https://api.twitter.com/1.1/statuses/update.json", params=params)
 print(res.status_code, res.text)
 
 if res.status_code != 200:
